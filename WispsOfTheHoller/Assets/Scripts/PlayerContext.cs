@@ -2,15 +2,22 @@ using UnityEngine;
 
 public class PlayerContext : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private GameObject parentObject;
+    public GameObject ParentObject { get =>  parentObject; }
+    [SerializeField]
+    private GameObject model;
+    public GameObject Model { get => model; }
+    [SerializeField]
+    private Rigidbody body;
+    public Rigidbody Body { get => body; }
+    [SerializeField]
+    private PlayerStats stats;
+    public PlayerStats Stats { get => stats; }
+    [SerializeField]
+    private GameObject cameraRoot;
+    public GameObject CameraRoot { get => cameraRoot; }
+    [SerializeField]
+    private PlayerInputHandler inputHandler;
+    public PlayerInputHandler InputHandler { get => inputHandler; }
 }

@@ -10,6 +10,20 @@ public class PlayerInputHandler : MonoBehaviour
     public bool Dash { get; private set; }
     public bool Interact { get; private set; }
 
+    [ContextMenu("Lock Cursor")]
+    public void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    [ContextMenu("Unlock Cursor")]
+    public void UnlockCursor()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     private void OnMove(InputValue value)
     {
         Movement = value.Get<Vector2>();
@@ -22,16 +36,16 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void OnAttack(InputValue value)
     {
-        Attack = value.Get<bool>();
+        Attack = value.isPressed;
     }
 
     private void OnSprint(InputValue value) 
     { 
-        Dash = value.Get<bool>(); 
+        Dash = value.isPressed; 
     }
 
     private void OnInteract(InputValue value)
     {
-        Interact = value.Get<bool>();
+        Interact = value.isPressed;
     }
 }
