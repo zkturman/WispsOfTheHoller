@@ -20,7 +20,7 @@ public abstract class BaseState : MonoBehaviour, IPlayerState
 
     public abstract void FixedUpdateState();
 
-    public void LateUpdateState()
+    public virtual void LateUpdateState()
     {
         if (playerContext.InputHandler.Look != Vector2.zero)
         {

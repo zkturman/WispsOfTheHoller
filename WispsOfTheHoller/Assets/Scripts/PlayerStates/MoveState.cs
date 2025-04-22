@@ -5,7 +5,15 @@ public class MoveState : BaseState
     public override IPlayerState GetNextState()
     {
         IPlayerState nextState = null;
-        if (playerContext.InputHandler.Movement == Vector2.zero)
+        if (playerContext.InputHandler.Dash)
+        {
+            nextState = GetComponent<SprintState>();
+        }
+        else if (playerContext.InputHandler.Attack)
+        {
+            nextState = GetComponent<AttackState>();
+        }
+        else if (playerContext.InputHandler.Movement == Vector2.zero)
         {
             nextState = GetComponent<IdleState>();
         }

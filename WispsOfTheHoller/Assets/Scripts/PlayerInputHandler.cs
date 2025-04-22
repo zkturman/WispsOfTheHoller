@@ -6,9 +6,9 @@ public class PlayerInputHandler : MonoBehaviour
 {
     public Vector2 Movement { get; private set; }
     public Vector2 Look { get; private set; }
-    public bool Attack { get; private set; }
-    public bool Dash { get; private set; }
-    public bool Interact { get; private set; }
+    public bool Attack { get; set; }
+    public bool Dash { get; set; }
+    public bool Interact { get; set; }
 
     [ContextMenu("Lock Cursor")]
     public void LockCursor()

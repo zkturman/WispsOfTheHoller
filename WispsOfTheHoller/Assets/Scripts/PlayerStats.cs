@@ -8,4 +8,7 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     private float rotationSpeed;
     public float RotationSpeed { get => rotationSpeed; }
+    [SerializeField]
+    private float dashSpeed = 10;
+    public float DashSpeed { get => dashSpeed; }
 }

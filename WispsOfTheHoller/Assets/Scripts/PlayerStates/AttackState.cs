@@ -1,16 +1,52 @@
 using UnityEngine;
 
-public class AttackState : MonoBehaviour
+public class AttackState : BaseState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    [SerializeField]
+    private float attackTimeInSeconds = 1.5f;
+    private float secondsInState = 0f;
+    [SerializeField]
+    private float attackDistance = 3f;
+    public override void EnterState()
     {
-        
+        playerContext.InputHandler.Attack = false;
+        secondsInState = 0f;
+        playerContext.Body.linearVelocity = Vector3.zero;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void FixedUpdateState()
     {
-        
+        if (Physics.Raycast(playerContext.Model.transform.position, playerContext.Model.transform.forward, out RaycastHit hitInfo, attackDistance))
+        {
+            if (hitInfo.collider.TryGetComponent(out PuzzleTarget target))
+            {
+                target.Solve();
+            }
+        }
+    }
+
+    public override IPlayerState GetNextState()
+    { 
+        IPlayerState nextState = null;
+        if (secondsInState > attackTimeInSeconds)
+        {
+            nextState = GetComponent<IdleState>();
+        }
+        return nextState;
+    }
+
+    public override void UpdateState()
+    {
+        secondsInState += Time.deltaTime;
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        if (playerContext != null)
+        {
+            Gizmos.DrawSphere(playerContext.Model.transform.position, 1f);
+            Gizmos.DrawLine(playerContext.Model.transform.position, playerContext.Model.transform.position + (playerContext.Model.transform.forward * attackDistance));
+        }
     }
 }
