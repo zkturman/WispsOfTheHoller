@@ -13,4 +13,9 @@ public class WispBehaviour : MonoBehaviour
     {
         
     }
+
+    public void Collect()
+    {
+
+    }
 }
