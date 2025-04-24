@@ -11,4 +11,13 @@ public class PlayerStats : MonoBehaviour
     [SerializeField]
     private float dashSpeed = 10;
     public float DashSpeed { get => dashSpeed; }
+    [SerializeField]
+    private float baseMana = 100;
+    public float BaseMana { get => baseMana; }
+    [SerializeField]
+    private float dashRequiredMana = 8;
+    public float DashRequiredMana { get => dashRequiredMana; }
+    [SerializeField]
+    private float screamRequiredMana = 13;
+    public float ScreamRequiredMan { get => screamRequiredMana; }
 }

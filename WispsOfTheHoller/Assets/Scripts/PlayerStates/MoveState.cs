@@ -32,7 +32,11 @@ public class MoveState : BaseState
 
     public override void UpdateState()
     {
-        playerContext.Model.transform.rotation = Quaternion.LookRotation(playerContext.Body.linearVelocity, playerContext.Model.transform.up);
+        Vector2 unit = playerContext.InputHandler.Movement.normalized;
+        float angleInRadians = Mathf.Atan2(unit.x, unit.y); // Get the angle in radians
+        float angleInDegrees = angleInRadians * Mathf.Rad2Deg;
+        playerContext.Model.transform.rotation = playerContext.CameraRoot.transform.rotation;
+        playerContext.Model.transform.Rotate(0, angleInDegrees, 0);
     }
 
     public override void FixedUpdateState()

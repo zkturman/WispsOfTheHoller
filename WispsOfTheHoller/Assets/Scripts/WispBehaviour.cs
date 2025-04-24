@@ -2,20 +2,21 @@ using UnityEngine;
 
 public class WispBehaviour : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    private WispManager _manager;
 
-    // Update is called once per frame
-    void Update()
+    public void Initialise(WispManager manager)
     {
-        
+        _manager = manager;
     }
 
     public void Collect()
     {
-
+        this.gameObject.SetActive(false);
+        _manager.MarkCollected(this);
+    }
+    
+    public void ResetWisp()
+    {
+        this.gameObject.SetActive(true);
     }
 }
