@@ -11,6 +11,7 @@ public class SprintState : BaseState
         playerContext.InputHandler.Dash = false;
         secondsInState = 0f;
         playerContext.Body.linearVelocity = playerContext.Stats.DashSpeed * playerContext.ParentObject.transform.forward;
+        playerContext.Controller.UseMana(playerContext.Stats.DashRequiredMana);
     }
 
     public override void FixedUpdateState()

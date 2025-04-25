@@ -1,3 +1,4 @@
+using UnityEditor.UIElements;
 using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
@@ -19,5 +20,5 @@ public class PlayerStats : MonoBehaviour
     public float DashRequiredMana { get => dashRequiredMana; }
     [SerializeField]
     private float screamRequiredMana = 13;
-    public float ScreamRequiredMan { get => screamRequiredMana; }
+    public float ScreamRequiredMana { get => screamRequiredMana; }
 }

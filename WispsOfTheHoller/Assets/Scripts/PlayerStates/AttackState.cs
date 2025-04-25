@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class AttackState : BaseState
 {
@@ -7,11 +8,15 @@ public class AttackState : BaseState
     private float secondsInState = 0f;
     [SerializeField]
     private float attackDistance = 3f;
+    [SerializeField]
+    private VisualEffect screamEffect;
     public override void EnterState()
     {
         playerContext.InputHandler.Attack = false;
         secondsInState = 0f;
         playerContext.Body.linearVelocity = Vector3.zero;
+        playerContext.Controller.UseMana(playerContext.Stats.ScreamRequiredMana);
+        screamEffect.Play();
     }
 
     public override void FixedUpdateState()

@@ -6,6 +6,9 @@ public class PlayerContext : MonoBehaviour
     private GameObject parentObject;
     public GameObject ParentObject { get =>  parentObject; }
     [SerializeField]
+    private PlayerController controller;
+    public PlayerController Controller { get => controller; }
+    [SerializeField]
     private GameObject model;
     public GameObject Model { get => model; }
     [SerializeField]
