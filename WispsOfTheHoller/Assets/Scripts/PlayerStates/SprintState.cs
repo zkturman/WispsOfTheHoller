@@ -20,9 +20,9 @@ public class SprintState : BaseState
             * playerContext.Model.transform.forward;
     }
 
-    public override IPlayerState GetNextState()
+    public override ICharacterState GetNextState()
     {
-        IPlayerState nextState = null;
+        ICharacterState nextState = null;
         if (secondsInState > secondsOfDash)
         {
             nextState = GetComponent<IdleState>();

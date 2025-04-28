@@ -3,9 +3,9 @@ using UnityEngine;
 public class IdleState : BaseState
 {
 
-    public override IPlayerState GetNextState()
+    public override ICharacterState GetNextState()
     {
-        IPlayerState nextState = null;
+        ICharacterState nextState = null;
         if (playerContext.InputHandler.Dash && playerContext.Controller.HasMana())
         {
             nextState = GetComponent<SprintState>();

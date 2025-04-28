@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerContext : MonoBehaviour
+public class PlayerContext : CharacterContext
 {
     [SerializeField]
     private GameObject parentObject;

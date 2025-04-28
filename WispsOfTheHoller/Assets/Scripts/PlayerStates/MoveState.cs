@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class MoveState : BaseState
 {
-    public override IPlayerState GetNextState()
+    public override ICharacterState GetNextState()
     {
-        IPlayerState nextState = null;
+        ICharacterState nextState = null;
         if (playerContext.InputHandler.Dash && playerContext.Controller.HasMana())
         {
             nextState = GetComponent<SprintState>();
@@ -18,11 +18,6 @@ public class MoveState : BaseState
             nextState = GetComponent<IdleState>();
         }
         return nextState;
-    }
-
-    public override void InitialiseState(PlayerContext context)
-    {
-        playerContext = context;
     }
 
     public override void EnterState()

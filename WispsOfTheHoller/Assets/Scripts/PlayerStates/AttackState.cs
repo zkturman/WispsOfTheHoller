@@ -30,9 +30,9 @@ public class AttackState : BaseState
         }
     }
 
-    public override IPlayerState GetNextState()
+    public override ICharacterState GetNextState()
     { 
-        IPlayerState nextState = null;
+        ICharacterState nextState = null;
         if (secondsInState > attackTimeInSeconds)
         {
             nextState = GetComponent<IdleState>();
