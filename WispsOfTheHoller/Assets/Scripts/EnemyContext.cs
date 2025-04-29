@@ -2,15 +2,26 @@ using UnityEngine;
 
 public class EnemyContext : CharacterContext
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    private GameObject _parent;
+    public GameObject Parent { get => _parent; }
+    [SerializeField]
+    private EnemyController _controller;
+    public EnemyController Controller { get =>  _controller; }
+    [SerializeField]
+    private Rigidbody _body;
+    public Rigidbody Body { get => _body; }
+    [SerializeField]
+    private GameObject _model;
+    public GameObject Model { get => _model; }
+    [SerializeField]
+    private Animator _animator;
+    public Animator Animator { get => _animator; }
+    [SerializeField]
+    private EnemyStats _stats;
+    public EnemyStats Stats { get => _stats; }
+    [SerializeField]
+    private GameObject _followObject;
+    public GameObject FollowObject { get => _followObject; }
+    public GameObject Player { get; set; }
 }

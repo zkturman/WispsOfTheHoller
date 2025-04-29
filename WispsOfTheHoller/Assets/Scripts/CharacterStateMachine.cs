@@ -1,3 +1,4 @@
+using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
 public class CharacterStateMachine: MonoBehaviour
@@ -45,7 +46,7 @@ public class CharacterStateMachine: MonoBehaviour
 
     private void LateUpdate()
     {
-        if (currentState != null)
+        if (currentState != null && currentState is BaseState)
         {
             (currentState as BaseState).LateUpdateState();
         }

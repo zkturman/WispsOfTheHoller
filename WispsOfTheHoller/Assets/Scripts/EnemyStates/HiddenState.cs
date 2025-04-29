@@ -1,16 +1,38 @@
 using UnityEngine;
 
-public class HiddenState : MonoBehaviour
+public class HiddenState : BaseEnemyState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private bool _playerWithinBoundary = false;
+    public override void EnterState()
     {
-        
+        _playerWithinBoundary = false;
+        enemyContext.Model.gameObject.SetActive(false);
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void FixedUpdateState()
     {
-        
+    }
+
+    public override ICharacterState GetNextState()
+    {
+        ICharacterState nextState = null;
+        if (_playerWithinBoundary)
+        {
+            nextState = GetComponent<ChaseState>();
+        }
+        return nextState;
+    }
+
+    public override void UpdateState()
+    {
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            _playerWithinBoundary = true;
+            enemyContext.Player = other.gameObject;
+        }
     }
 }

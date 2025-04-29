@@ -1,16 +1,24 @@
 using UnityEngine;
 
-public class EnemyAttackState : MonoBehaviour
+public class EnemyAttackState : BaseEnemyState
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void EnterState()
     {
-        
+        throw new System.NotImplementedException();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void FixedUpdateState()
     {
-        
+        throw new System.NotImplementedException();
+    }
+
+    public override ICharacterState GetNextState()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public override void UpdateState()
+    {
+        throw new System.NotImplementedException();
     }
 }
