@@ -14,9 +14,9 @@ public class WispBehaviour : MonoBehaviour
         this.gameObject.SetActive(false);
         _manager.MarkCollected(this);
     }
-    
-    public void ResetWisp()
+
+    public void Hide()
     {
-        this.gameObject.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 }

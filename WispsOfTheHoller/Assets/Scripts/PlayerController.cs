@@ -25,6 +25,11 @@ public class PlayerController : MonoBehaviour
         return _currentMana > 0;
     }
 
+    public float RemainingManaPercent()
+    {
+        return _currentMana / playerContext.Stats.BaseMana;
+    }
+
     public void RefillMana()
     {
         _currentMana = playerContext.Stats.BaseMana;

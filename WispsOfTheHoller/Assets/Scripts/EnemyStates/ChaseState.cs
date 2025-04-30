@@ -4,8 +4,6 @@ public class ChaseState : BaseEnemyState
 {
     [SerializeField]
     private float _attackTriggerDistance = 2;
-    [SerializeField]
-    private float _triggerSize = 2;
     private bool _shouldTriggerAttack = false;
 
     public override void EnterState()
@@ -31,10 +29,10 @@ public class ChaseState : BaseEnemyState
 
     public override void UpdateState()
     {
-        if (enemyContext.Player != null)
+        if (enemyContext.FollowObject != null)
         {
-            enemyContext.Parent.transform.LookAt(enemyContext.Player.transform);
-            float distance = Vector3.Distance(transform.position, enemyContext.Player.transform.position);
+            enemyContext.Parent.transform.LookAt(enemyContext.FollowObject.transform, Vector3.up);
+            float distance = Vector3.Distance(transform.position, enemyContext.FollowObject.transform.position);
             if (distance < _attackTriggerDistance)
             {
                 _shouldTriggerAttack = true;
@@ -47,6 +45,5 @@ public class ChaseState : BaseEnemyState
         Vector3 start = transform.position;
         Vector3 end = transform.position + (transform.forward * _attackTriggerDistance);
         Gizmos.DrawLine(start, end);
-        Gizmos.DrawWireSphere(end, _triggerSize);
     }
 }

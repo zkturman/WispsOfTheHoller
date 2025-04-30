@@ -23,5 +23,19 @@ public class EnemyContext : CharacterContext
     [SerializeField]
     private GameObject _followObject;
     public GameObject FollowObject { get => _followObject; }
-    public GameObject Player { get; set; }
+    [SerializeField]
+    private CollectionTimer _timer;
+    public CollectionTimer Timer { get => _timer; }
+
+    private void Awake()
+    {
+        if (_followObject == null)
+        {
+            _followObject = GameObject.FindWithTag("Player");
+        }
+        if (_timer == null)
+        {
+            _timer = FindFirstObjectByType<CollectionTimer>();
+        }
+    }
 }

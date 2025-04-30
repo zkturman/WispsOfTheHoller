@@ -1,39 +1,71 @@
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 
 public class WispManager : MonoBehaviour
 {
+    private static WispManager _instance;
     [SerializeField]
     private GameObject[] _wispLocations;
+    private Dictionary<Vector3, int> _wispMap;
     [SerializeField]
     private GameObject _wispPrefab;
-    private GameObject[] _wispInstances;
-    private Queue<WispBehaviour> _collectedWisps;
+    private WispBehaviour[] _wispInstances;
+    private Queue<Vector3> _collectedWisps;
     [SerializeField]
     private int _wispsToLoseOnReset = 5;
+    private CollectionTimer _gameTimer;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
     void Start()
     {
-        _collectedWisps = new Queue<WispBehaviour>();
-        _wispInstances = new GameObject[_wispLocations.Length];
+        _collectedWisps = new Queue<Vector3>();
+        _wispMap = new Dictionary<Vector3, int>();
+        _wispInstances = new WispBehaviour[_wispLocations.Length];
+        for (int i = 0; i < _wispLocations.Length; i++)
+        {
+            _wispMap.Add(_wispLocations[i].transform.position, i);
+        }
+        InitialiseWisps();
+        DontDestroyOnLoad(this.gameObject);
+    }
+
+    public void InitialiseWisps()
+    {
+        _gameTimer = GetComponent<CollectionTimer>();
         for (int i = 0; i < _wispLocations.Length; i++)
         {
             GameObject wispInstance = Instantiate(_wispPrefab, _wispLocations[i].transform.position, Quaternion.identity);
             WispBehaviour instanceBehaviour = wispInstance.GetComponent<WispBehaviour>();
             instanceBehaviour.Initialise(this);
-            _collectedWisps.Enqueue(instanceBehaviour);
+            _wispInstances[i] = instanceBehaviour;
         }
     }
 
     public void MarkCollected(WispBehaviour collectedWisp)
     {
-        _collectedWisps.Enqueue(collectedWisp);
+        _collectedWisps.Enqueue(collectedWisp.transform.position);
+        _gameTimer.ResetTimer();
+    }
+
+    public bool CanReset()
+    {
+        return _wispsToLoseOnReset >= _collectedWisps.Count;
     }
 
     public void ResetCollection()
     {
+        InitialiseWisps();
         int wispsToLose = _wispsToLoseOnReset;
         if (_collectedWisps.Count < _wispsToLoseOnReset)
         {
@@ -41,8 +73,18 @@ public class WispManager : MonoBehaviour
         }
         while (wispsToLose > 0)
         {
-            WispBehaviour wispInstance = _collectedWisps.Dequeue();
-            wispInstance.ResetWisp();
+            _collectedWisps.Dequeue();
+            wispsToLose--;
         }
+        foreach(Vector3 position in _collectedWisps)
+        {
+            WispBehaviour wispInstance = _wispInstances[_wispMap[position]];
+            wispInstance.Hide();
+        }
+    }
+
+    public float GetWispCollectionPercent()
+    {
+        return (float)_collectedWisps.Count / _wispLocations.Length;
     }
 }

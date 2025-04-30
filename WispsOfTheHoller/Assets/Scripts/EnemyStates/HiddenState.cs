@@ -2,7 +2,10 @@ using UnityEngine;
 
 public class HiddenState : BaseEnemyState
 {
+    [SerializeField]
+    private float _chaseDistance = 8;
     private bool _playerWithinBoundary = false;
+
     public override void EnterState()
     {
         _playerWithinBoundary = false;
@@ -16,7 +19,7 @@ public class HiddenState : BaseEnemyState
     public override ICharacterState GetNextState()
     {
         ICharacterState nextState = null;
-        if (_playerWithinBoundary)
+        if (_playerWithinBoundary || enemyContext.Timer.TimeIsExpired)
         {
             nextState = GetComponent<ChaseState>();
         }
@@ -25,14 +28,19 @@ public class HiddenState : BaseEnemyState
 
     public override void UpdateState()
     {
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
+        enemyContext.Parent.transform.LookAt(enemyContext.FollowObject.transform);
+        float playerDistance = Vector3.Distance(transform.position, enemyContext.FollowObject.transform.position);
+        if (playerDistance < _chaseDistance)
         {
             _playerWithinBoundary = true;
-            enemyContext.Player = other.gameObject;
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.blue;
+        Vector3 start = transform.position;
+        Vector3 end = transform.position + (transform.forward * _chaseDistance);
+        Gizmos.DrawLine(start, end);
     }
 }
