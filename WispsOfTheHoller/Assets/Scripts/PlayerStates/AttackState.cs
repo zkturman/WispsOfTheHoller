@@ -1,3 +1,4 @@
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.VFX;
 
@@ -12,6 +13,8 @@ public class AttackState : BaseState
     private VisualEffect screamEffect;
     [SerializeField]
     private AudioClip screamSound;
+    [SerializeField]
+    private string animationTrigger = "Attack";
     public override void EnterState()
     {
         playerContext.InputHandler.Attack = false;
@@ -19,6 +22,7 @@ public class AttackState : BaseState
         playerContext.Body.linearVelocity = Vector3.zero;
         playerContext.Controller.UseMana(playerContext.Stats.ScreamRequiredMana);
         screamEffect.Play();
+        playerContext.Animator.SetTrigger(animationTrigger);
         if (screamSound != null)
         {
             playerContext.AudioSource.PlayOneShot(screamSound);

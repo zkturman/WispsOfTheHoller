@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class MoveState : BaseState
 {
+    [SerializeField]
+    private string animationTrigger = "Move";
     public override ICharacterState GetNextState()
     {
         ICharacterState nextState = null;
@@ -22,7 +24,7 @@ public class MoveState : BaseState
 
     public override void EnterState()
     {
-
+        playerContext.Animator.SetTrigger(animationTrigger);
     }
 
     public override void UpdateState()

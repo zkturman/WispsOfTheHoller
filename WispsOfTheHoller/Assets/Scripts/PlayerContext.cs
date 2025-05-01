@@ -26,5 +26,8 @@ public class PlayerContext : CharacterContext
     [SerializeField]
     private AudioSource audioSource;
     public AudioSource AudioSource { get => audioSource; }
+    [SerializeField]
+    private Animator animator;
+    public Animator Animator { get => animator; }
 
 }

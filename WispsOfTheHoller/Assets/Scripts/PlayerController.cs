@@ -20,6 +20,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.TryGetComponent(out ManaPoolBehaviour manaPool))
+        {
+            RefillMana(manaPool.ManaValue);
+            playerContext.AudioSource.PlayOneShot(manaPool.RestoreSound);
+        }
+    }
+
     public bool HasMana()
     {
         return _currentMana > 0;
@@ -38,6 +47,10 @@ public class PlayerController : MonoBehaviour
     public void RefillMana(float refillAmount)
     {
         _currentMana += refillAmount;
+        if (_currentMana > playerContext.Stats.BaseMana)
+        {
+            _currentMana = playerContext.Stats.BaseMana;
+        }
     }
 
     public void UseMana(float manaCost)

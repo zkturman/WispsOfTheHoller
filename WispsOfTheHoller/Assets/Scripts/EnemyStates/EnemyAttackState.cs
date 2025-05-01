@@ -20,6 +20,7 @@ public class EnemyAttackState : BaseEnemyState
     public override void EnterState()
     {
         _shouldTriggerChase = false;
+        enemyContext.Body.linearVelocity *= 0.5f;
         StartCoroutine(attackRoutine());
     }
 

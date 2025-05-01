@@ -62,7 +62,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   key: Idle
-  _chaseDistance: 6
+  _chaseDistance: 8
   _wakeCry: {fileID: 8300000, guid: dd68c6f0dfd306c489dc7d2919167e42, type: 3}
 --- !u!114 &3829187180180811785
 MonoBehaviour:
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e98d79f9b59a10440ab8ef376204eb11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 3
+  _speed: 6
 --- !u!114 &6137555307081299415
 MonoBehaviour:
   m_ObjectHideFlags: 0

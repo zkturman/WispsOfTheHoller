@@ -45,11 +45,15 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-            SceneManager.sceneLoaded += reloadLevel;
-            Debug.Log("Would have game overed, but you know, for testing.");
-            //SceneManager.LoadScene("GameOver");
+            SceneManager.LoadScene("GameOver");
+            SceneManager.sceneLoaded += destroyInstance;
         }
+    }
+
+    public static void FinishGame()
+    {
+        SceneManager.LoadScene("Credits");
+        SceneManager.sceneLoaded += destroyInstance;
     }
 
     private static void reloadLevel(Scene scene, LoadSceneMode mode)
@@ -58,5 +62,11 @@ public class LevelManager : MonoBehaviour
         _instance._collectionTimer.ResetTimer();
         _instance.SetUiDependencies();
         SceneManager.sceneLoaded -= reloadLevel;
+    }
+
+    private static void destroyInstance(Scene scene, LoadSceneMode mode)
+    {
+        Destroy(_instance.gameObject);
+        SceneManager.sceneLoaded -= destroyInstance;
     }
 }

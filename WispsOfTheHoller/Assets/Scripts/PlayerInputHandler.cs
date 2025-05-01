@@ -4,6 +4,9 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    [SerializeField]
+    private bool _lockCursor = true;
+
     public Vector2 Movement { get; private set; }
     public Vector2 Look { get; private set; }
     public bool Attack { get; set; }
@@ -26,7 +29,14 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void Awake()
     {
-        LockCursor();
+        if (_lockCursor)
+        {
+            LockCursor();
+        }
+        else
+        {
+            UnlockCursor();
+        }
     }
 
     private void OnMove(InputValue value)

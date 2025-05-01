@@ -1,0 +1,13 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/Styles.uss?fileID=7433441132597879392&amp;guid=5f9dcb86fcf036f44b1088536d21c169&amp;type=3#Styles" />
+    <ui:VisualElement style="flex-grow: 1;">
+        <ui:VisualElement style="flex-grow: 1; margin-top: 100px;">
+            <ui:Label text="Credits" class="title-large" />
+            <ui:Label text="- World Space Trees (FREE) - Shader by RRFreelance&#10;- Yughues Free Ground Materials by Nobiax / Yughues  &#10;- Monster SFX - 111518 by GWriterStudio&#10;- Fantasy Skybox FREE by Render Knight&#10;- FREE Casual Game SFX Pack by Dustyroom&#10;- Piano Instrumental Music Loops by alkakrab&#10;- 8Bit Sfx One Shot by Vincent T&#10;- Hand Painted Bark Textures by Artcitizen&#10;- Cartoon FX Remaster Free by Jean Morean&#10;- RPG Game Music by Marcelo Fernandez Music&#10;&#10;- Mixamo for animations&#10;- DaFonts for fonts" class="title-small" />
+        </ui:VisualElement>
+        <ui:VisualElement style="flex-grow: 1; align-items: center; justify-content: space-evenly;">
+            <ui:Button text="Continue" name="ContinueButton" class="menu-button" />
+        </ui:VisualElement>
+    </ui:VisualElement>
+    <ui:VisualElement name="Curtain" picking-mode="Ignore" class="scene-curtain fade-in" />
+</ui:UXML>

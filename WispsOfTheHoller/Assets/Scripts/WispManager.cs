@@ -13,6 +13,10 @@ public class WispManager : MonoBehaviour
     private Queue<Vector3> _collectedWisps;
     [SerializeField]
     private int _wispsToLoseOnReset = 5;
+    [SerializeField]
+    private AudioClip _collectionSound;
+    [SerializeField]
+    private AudioSource _soundEmitter;
     private CollectionTimer _gameTimer;
     private MonsterSpawner _monsterSpawner;
 
@@ -62,11 +66,19 @@ public class WispManager : MonoBehaviour
         _monsterSpawner.RespawnMonster();
         _collectedWisps.Enqueue(collectedWisp.transform.position);
         _gameTimer.ResetTimer();
+        if (_collectedWisps.Count == _wispLocations.Length)
+        {
+            LevelManager.FinishGame();
+        }
+        else if (_collectionSound != null)
+        {
+            _soundEmitter.PlayOneShot(_collectionSound);
+        }
     }
 
     public bool CanReset()
     {
-        return _wispsToLoseOnReset >= _collectedWisps.Count;
+        return _collectedWisps.Count >= _wispsToLoseOnReset;
     }
 
     public void ResetCollection()

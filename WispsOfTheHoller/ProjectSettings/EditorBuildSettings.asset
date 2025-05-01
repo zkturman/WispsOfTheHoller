@@ -7,13 +7,16 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/StartMenu.unity
-    guid: 3514b89e8cceb16479bc134abe8da9ae
+    guid: 940c4f45750f86149a0bbe891d43eeb1
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/TheWoods.unity
+    guid: 16446d09b05427e46b634baba8fe7482
   - enabled: 1
     path: Assets/Scenes/GameOver.unity
-    guid: 76c9d3b58e3a39d449f18420486cf7d7
+    guid: 88ab69c57a8fd2740811396946b476ba
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: 88ba3d611fe432e4e936ba3ce533e511
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
   m_UseUCBPForAssetBundles: 0
