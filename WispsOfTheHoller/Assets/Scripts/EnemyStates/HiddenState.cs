@@ -4,12 +4,15 @@ public class HiddenState : BaseEnemyState
 {
     [SerializeField]
     private float _chaseDistance = 8;
-    private bool _playerWithinBoundary = false;
+    [SerializeField]
+    private AudioClip _wakeCry;
+    private bool _shouldWake = false;
 
     public override void EnterState()
     {
-        _playerWithinBoundary = false;
+        _shouldWake = false;
         enemyContext.Model.gameObject.SetActive(false);
+
     }
 
     public override void FixedUpdateState()
@@ -19,7 +22,7 @@ public class HiddenState : BaseEnemyState
     public override ICharacterState GetNextState()
     {
         ICharacterState nextState = null;
-        if (_playerWithinBoundary || enemyContext.Timer.TimeIsExpired)
+        if (_shouldWake)
         {
             nextState = GetComponent<ChaseState>();
         }
@@ -30,9 +33,18 @@ public class HiddenState : BaseEnemyState
     {
         enemyContext.Parent.transform.LookAt(enemyContext.FollowObject.transform);
         float playerDistance = Vector3.Distance(transform.position, enemyContext.FollowObject.transform.position);
-        if (playerDistance < _chaseDistance)
+        if (playerDistance < _chaseDistance || enemyContext.Timer.TimeIsExpired)
         {
-            _playerWithinBoundary = true;
+            _shouldWake = true;
+            PlayWakeCry();
+        }
+    }
+
+    private void PlayWakeCry()
+    {
+        if (_wakeCry != null)
+        {
+            enemyContext.AudioSource.PlayOneShot(_wakeCry);
         }
     }
 

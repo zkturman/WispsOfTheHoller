@@ -8,9 +8,13 @@ public class EnemyAttackState : BaseEnemyState
     [SerializeField]
     private float _attackTimeInSeconds = 1.625f;
     [SerializeField]
+    private float _attackDelayInSeconds = 1f;
+    [SerializeField]
     private float _attackSize = 1.5f;
     [SerializeField]
     private float _attackDistance = 1;
+    [SerializeField]
+    private AudioClip _attackSound;
     private bool _shouldTriggerChase = false;
     
     public override void EnterState()
@@ -21,14 +25,7 @@ public class EnemyAttackState : BaseEnemyState
 
     public override void FixedUpdateState()
     {
-        RaycastHit[] attackHits = Physics.SphereCastAll(transform.position, _attackSize, transform.forward, _attackDistance);
-        for (int i = 0; i < attackHits.Length; i++)
-        {
-            if (attackHits[i].collider.tag == "Player")
-            {
-                LevelManager.ResetLevel();
-            }
-        }
+
     }
 
     public override ICharacterState GetNextState()
@@ -47,8 +44,22 @@ public class EnemyAttackState : BaseEnemyState
 
     private IEnumerator attackRoutine()
     {
+        float remainingWaitTime = _attackTimeInSeconds - _attackDelayInSeconds;
         enemyContext.Animator.SetTrigger("Attack");
-        yield return new WaitForSeconds(_attackTimeInSeconds);
+        if (_attackSound != null)
+        {
+            enemyContext.AudioSource.PlayOneShot(_attackSound);
+        }
+        yield return new WaitForSeconds(_attackDelayInSeconds);
+        RaycastHit[] attackHits = Physics.SphereCastAll(transform.position, _attackSize, transform.forward, _attackDistance);
+        for (int i = 0; i < attackHits.Length; i++)
+        {
+            if (attackHits[i].collider.tag == "Player")
+            {
+                LevelManager.ResetLevel();
+            }
+        }
+        yield return new WaitForSeconds(remainingWaitTime);
         _shouldTriggerChase = true;
     }
 

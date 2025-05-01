@@ -23,4 +23,8 @@ public class PlayerContext : CharacterContext
     [SerializeField]
     private PlayerInputHandler inputHandler;
     public PlayerInputHandler InputHandler { get => inputHandler; }
+    [SerializeField]
+    private AudioSource audioSource;
+    public AudioSource AudioSource { get => audioSource; }
+
 }

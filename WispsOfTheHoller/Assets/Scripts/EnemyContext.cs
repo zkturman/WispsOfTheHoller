@@ -26,6 +26,9 @@ public class EnemyContext : CharacterContext
     [SerializeField]
     private CollectionTimer _timer;
     public CollectionTimer Timer { get => _timer; }
+    [SerializeField]
+    private AudioSource _audioSource;
+    public AudioSource AudioSource { get => _audioSource; }
 
     private void Awake()
     {

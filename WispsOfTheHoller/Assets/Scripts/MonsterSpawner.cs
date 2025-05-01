@@ -7,6 +7,7 @@ public class MonsterSpawner : MonoBehaviour
     private Transform[] _spawnPoints;
     [SerializeField]
     private GameObject _monsterToSpawn;
+    private GameObject _monsterInstance;
 
     private void Start()
     {
@@ -16,7 +17,21 @@ public class MonsterSpawner : MonoBehaviour
             Transform spawnPoint = _spawnPointContainer.transform.GetChild(i);
             _spawnPoints[i] = spawnPoint;
         }
+        SpawnMonster();
+    }
+
+    public void RespawnMonster()
+    {
+        if (_monsterInstance != null)
+        {
+            Destroy(_monsterInstance);
+            SpawnMonster();
+        }
+    }
+
+    private void SpawnMonster()
+    {
         int diceRoll = Random.Range(0, _spawnPoints.Length);
-        Instantiate(_monsterToSpawn, _spawnPoints[diceRoll].position, Quaternion.identity);
+        _monsterInstance = Instantiate(_monsterToSpawn, _spawnPoints[diceRoll].position, Quaternion.identity);
     }
 }

@@ -24,6 +24,11 @@ public class PlayerInputHandler : MonoBehaviour
         Cursor.visible = true;
     }
 
+    private void Awake()
+    {
+        LockCursor();
+    }
+
     private void OnMove(InputValue value)
     {
         Movement = value.Get<Vector2>();

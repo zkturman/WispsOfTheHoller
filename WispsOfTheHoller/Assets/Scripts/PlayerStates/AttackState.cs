@@ -10,6 +10,8 @@ public class AttackState : BaseState
     private float attackDistance = 3f;
     [SerializeField]
     private VisualEffect screamEffect;
+    [SerializeField]
+    private AudioClip screamSound;
     public override void EnterState()
     {
         playerContext.InputHandler.Attack = false;
@@ -17,6 +19,10 @@ public class AttackState : BaseState
         playerContext.Body.linearVelocity = Vector3.zero;
         playerContext.Controller.UseMana(playerContext.Stats.ScreamRequiredMana);
         screamEffect.Play();
+        if (screamSound != null)
+        {
+            playerContext.AudioSource.PlayOneShot(screamSound);
+        }
     }
 
     public override void FixedUpdateState()

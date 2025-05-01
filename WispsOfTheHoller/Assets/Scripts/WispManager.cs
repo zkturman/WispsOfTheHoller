@@ -14,6 +14,7 @@ public class WispManager : MonoBehaviour
     [SerializeField]
     private int _wispsToLoseOnReset = 5;
     private CollectionTimer _gameTimer;
+    private MonsterSpawner _monsterSpawner;
 
     private void Awake()
     {
@@ -48,12 +49,17 @@ public class WispManager : MonoBehaviour
             GameObject wispInstance = Instantiate(_wispPrefab, _wispLocations[i].transform.position, Quaternion.identity);
             WispBehaviour instanceBehaviour = wispInstance.GetComponent<WispBehaviour>();
             instanceBehaviour.Initialise(this);
-            _wispInstances[i] = instanceBehaviour;
+            _instance._wispInstances[i] = instanceBehaviour;
         }
     }
 
     public void MarkCollected(WispBehaviour collectedWisp)
     {
+        if (_monsterSpawner == null)
+        {
+            _monsterSpawner = FindFirstObjectByType<MonsterSpawner>();
+        }
+        _monsterSpawner.RespawnMonster();
         _collectedWisps.Enqueue(collectedWisp.transform.position);
         _gameTimer.ResetTimer();
     }
